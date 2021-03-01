@@ -43,7 +43,6 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(transform.rotation * velocity * Time.deltaTime);
 
-        print(new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")));
         camVerticalRotation += Input.GetAxis("Mouse Y") * mouseSpeed * (invertMouseY ? 1.0f : -1.0f);
         camVerticalRotation = Mathf.Clamp(camVerticalRotation, -90.0f, 90.0f);
         transform.Rotate(transform.up, Input.GetAxis("Mouse X") * mouseSpeed);
