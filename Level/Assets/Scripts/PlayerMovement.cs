@@ -45,9 +45,9 @@ public class PlayerMovement : MonoBehaviour
         }
         
         if (Input.GetKeyDown(KeyCode.LeftControl)) crouching = !crouching;
-        Vector2 xy = Vector2.ClampMagnitude(new Vector2(velocity.x, velocity.z), 
+        Vector2 xz = Vector2.ClampMagnitude(new Vector2(velocity.x, velocity.z), 
             moveSpeedMax * (crouching ? crouchMoveSpeedFactor : 1.0f));
-        velocity = new Vector3(xy.x, velocity.y, xy.y);
+        velocity = new Vector3(xz.x, velocity.y, xz.y);
 
         velocity += gravity * Time.deltaTime;
 

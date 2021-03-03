@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Patrol : MonoBehaviour
 {
@@ -49,13 +50,19 @@ public class Patrol : MonoBehaviour
             
             Vector3 playerRelative = player.transform.position - transform.position;
             float angleToPlayer = Mathf.Abs(Vector3.Angle(playerRelative, transform.forward));
-            print(angleToPlayer);
             if (!Physics.Raycast(transform.position, playerRelative, playerRelative.magnitude) 
                 && angleToPlayer < viewAngle)
             {
+                SceneManager.LoadScene("GameOver");
                 chasing = true;
                 lastKnownLocation = player.transform.position;
             }
         }
+    }
+
+    public void Alert(Vector3 position)
+    {
+        chasing = true;
+        lastKnownLocation = position;
     }
 }
