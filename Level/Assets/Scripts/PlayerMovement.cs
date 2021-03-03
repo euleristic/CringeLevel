@@ -10,18 +10,25 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpStrength;
     [SerializeField] float mouseSpeed;
     [SerializeField] bool invertMouseY;
+    [SerializeField] float crouchFactor;
+    [SerializeField] float crouchMoveSpeedFactor;
+    [SerializeField] float crouchSpeed;
 
     CharacterController controller;
     Vector3 gravity;
     Vector3 velocity;
+    Vector3 crouchScale;
     Camera cam;
     float camVerticalRotation;
+    bool crouching;
     void Start()
     {
         controller = GetComponent<CharacterController>();
         gravity = Physics.gravity;
         cam = Camera.main;
-
+        camVerticalRotation = 0.0f;
+        crouching = false;
+        crouchScale = new Vector3(1.0f, crouchFactor, 1.0f);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -36,9 +43,12 @@ public class PlayerMovement : MonoBehaviour
             velocity /= frictionDivisor;
             velocity.y += Input.GetAxis("Jump") * jumpStrength;
         }
-        Vector2 xy = Vector2.ClampMagnitude(new Vector2(velocity.x, velocity.z), moveSpeedMax);
-        velocity = new Vector3(xy.x, velocity.y, xy.y);
         
+        if (Input.GetKeyDown(KeyCode.LeftControl)) crouching = !crouching;
+        Vector2 xy = Vector2.ClampMagnitude(new Vector2(velocity.x, velocity.z), 
+            moveSpeedMax * (crouching ? crouchMoveSpeedFactor : 1.0f));
+        velocity = new Vector3(xy.x, velocity.y, xy.y);
+
         velocity += gravity * Time.deltaTime;
 
         controller.Move(transform.rotation * velocity * Time.deltaTime);
@@ -48,5 +58,35 @@ public class PlayerMovement : MonoBehaviour
         transform.Rotate(transform.up, Input.GetAxis("Mouse X") * mouseSpeed);
         cam.transform.localRotation = Quaternion.Euler(camVerticalRotation, 0.0f, 0.0f);
 
+        if (crouching && transform.localScale != crouchScale)
+        {
+            //Lerping manually to keep track
+            Vector3 scaleLeft = crouchScale - transform.localScale;
+            if (scaleLeft.sqrMagnitude < 0.001f)
+            {
+                transform.localScale = crouchScale;
+                transform.position += scaleLeft / 2.0f;
+            }
+            else
+            {
+                transform.localScale += scaleLeft * crouchSpeed;
+                transform.position += scaleLeft * crouchSpeed / 2.0f;
+            }
+        }
+        if (!crouching && transform.localScale != Vector3.one)
+        {
+            //Lerping manually to keep track
+            Vector3 scaleLeft = Vector3.one - transform.localScale;
+            if (scaleLeft.sqrMagnitude < 0.01f)
+            {
+                transform.localScale = Vector3.one;
+                transform.position += scaleLeft / 2.0f;
+            }
+            else
+            {
+                transform.localScale += scaleLeft * crouchSpeed;
+                transform.position += scaleLeft * crouchSpeed / 2.0f;
+            }
+        }
     }
 }

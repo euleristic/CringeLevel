@@ -152,3 +152,6 @@ MonoBehaviour:
   jumpStrength: 3
   mouseSpeed: 1
   invertMouseY: 0
+  crouchFactor: 0.5
+  crouchMoveSpeedFactor: 0.5
+  crouchSpeed: 0.3
