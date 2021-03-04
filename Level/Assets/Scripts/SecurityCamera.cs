@@ -30,7 +30,7 @@ public class SecurityCamera : MonoBehaviour
             if (!Physics.Raycast(cam.transform.position, playerRelative, playerRelative.magnitude)
                 && angleToPlayer < viewAngle)
             {
-                SceneManager.LoadScene("GameOver");
+                player.GetComponent<PlayerLives>().Kill();
                 foreach (Patrol guard in AlertList)
                 {
                     guard.Alert(player.transform.position);

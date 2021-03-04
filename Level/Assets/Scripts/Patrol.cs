@@ -53,7 +53,7 @@ public class Patrol : MonoBehaviour
             if (!Physics.Raycast(transform.position, playerRelative, playerRelative.magnitude) 
                 && angleToPlayer < viewAngle)
             {
-                SceneManager.LoadScene("GameOver");
+                player.GetComponent<PlayerLives>().Kill();
                 chasing = true;
                 lastKnownLocation = player.transform.position;
             }
