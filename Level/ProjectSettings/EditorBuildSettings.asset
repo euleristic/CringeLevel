@@ -8,4 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: 8009d71a1d4253a4fb0d533c240d16ad
+  - enabled: 1
+    path: Assets/Scenes/Sandboxes/Ivan.unity
+    guid: 10eb6bf0fe8a498478bbb467624e737d
+  - enabled: 1
+    path: Assets/Scenes/Sandboxes/Valter.unity
+    guid: 00b8c7f1b399c0e4d99def72e4bb31ac
+  - enabled: 1
+    path: Assets/Scenes/Sandboxes/Mattis.unity
+    guid: 2db12e0f7742a674eb1adeda45773550
+  - enabled: 1
+    path: Assets/Scenes/Victory.unity
+    guid: f7792530e7315b4478778641c11f1644
   m_configObjects: {}
