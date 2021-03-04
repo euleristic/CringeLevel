@@ -10,9 +10,8 @@ public class PlayerLives : MonoBehaviour
 
     public void Kill()
     {
-        lives--;
-        if (lives == 0)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //if (lives == 0)
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void OnTriggerEnter(Collider other)
