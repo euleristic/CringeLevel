@@ -7,7 +7,6 @@ public class SceneTransitioner : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("I work");
         if (SceneManager.GetActiveScene().name == "Mattis")
         {
             SceneManager.LoadScene("Ivan");

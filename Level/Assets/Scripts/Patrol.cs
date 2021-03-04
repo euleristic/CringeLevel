@@ -47,7 +47,6 @@ public class Patrol : MonoBehaviour
         //Search for player
         if (player != null)
         {
-            
             Vector3 playerRelative = player.transform.position - transform.position;
             float angleToPlayer = Mathf.Abs(Vector3.Angle(playerRelative, transform.forward));
             if (!Physics.Raycast(transform.position, playerRelative, playerRelative.magnitude) 
