@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneReboot : MonoBehaviour
 {
-    KeyCode restartKey = KeyCode.Escape;
+    [SerializeField] KeyCode restartKey = KeyCode.R;
 
     // Update is called once per frame
     void Update()
