@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] PlayerOptions options;
     [SerializeField] float moveSpeedAcc;
     [SerializeField] float moveSpeedMax;
     [SerializeField] float frictionDivisor;
@@ -23,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     bool crouching;
     void Start()
     {
+        if (!UpdateOptions())
+            Debug.Log("Could not update options");
         controller = GetComponent<CharacterController>();
         gravity = Physics.gravity;
         cam = Camera.main;
@@ -31,20 +34,29 @@ public class PlayerMovement : MonoBehaviour
         crouchScale = new Vector3(1.0f, crouchFactor, 1.0f);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftControl)) crouching = !crouching;
+    }
     void FixedUpdate()
     {
         if (controller.isGrounded)
         {
+            Vector2 inputVector;
+            inputVector.x = Input.GetAxis("Horizontal");
+            inputVector.y = Input.GetAxis("Vertical");
+            inputVector = Vector2.ClampMagnitude(inputVector, 1.0f);
             velocity.y = 0.0f;
-            velocity.x += Input.GetAxis("Horizontal") * moveSpeedAcc;
-            velocity.z += Input.GetAxis("Vertical") * moveSpeedAcc;
+            velocity.x += inputVector.x * moveSpeedAcc;
+            velocity.z += inputVector.y * moveSpeedAcc;
             velocity /= frictionDivisor;
             velocity.y += Input.GetAxis("Jump") * jumpStrength;
         }
         
-        if (Input.GetKeyDown(KeyCode.LeftControl)) crouching = !crouching;
+        
         Vector2 xz = Vector2.ClampMagnitude(new Vector2(velocity.x, velocity.z), 
             moveSpeedMax * (crouching ? crouchMoveSpeedFactor : 1.0f));
         velocity = new Vector3(xz.x, velocity.y, xz.y);
@@ -89,4 +101,19 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+    
+    public bool UpdateOptions()
+    {
+        if (options != null)
+        {
+            float result = 0.0f;
+            if (options.GetValue("cameraInvert", ref result))
+                invertMouseY = result == 1.0f;
+            else return false;
+            if (!options.GetValue("mouseSpeed", ref mouseSpeed))
+                return false;
+        }
+        else return false;
+        return true;
+    }    
 }

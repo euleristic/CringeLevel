@@ -1,0 +1,2 @@
+cameraInvert=0
+mouseSpeed=1
