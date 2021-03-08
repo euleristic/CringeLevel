@@ -45,9 +45,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (controller.isGrounded)
         {
+            Vector2 inputVector;
+            inputVector.x = Input.GetAxis("Horizontal");
+            inputVector.y = Input.GetAxis("Vertical");
+            inputVector = Vector2.ClampMagnitude(inputVector, 1.0f);
             velocity.y = 0.0f;
-            velocity.x += Input.GetAxis("Horizontal") * moveSpeedAcc;
-            velocity.z += Input.GetAxis("Vertical") * moveSpeedAcc;
+            velocity.x += inputVector.x * moveSpeedAcc;
+            velocity.z += inputVector.y * moveSpeedAcc;
             velocity /= frictionDivisor;
             velocity.y += Input.GetAxis("Jump") * jumpStrength;
         }
