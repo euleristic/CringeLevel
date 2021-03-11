@@ -12,7 +12,12 @@ public class SceneReboot : MonoBehaviour
     {
        if(Input.GetKeyDown(restartKey))
        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            RebootScene();
        }
+    }
+
+    static public void RebootScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
