@@ -7,29 +7,35 @@ public class DoorOpen : MonoBehaviour
     [SerializeField] float openAngle;
     [SerializeField] float openingSpeed;
     [SerializeField] Transform parentTrans;
+    Vector3 currentEulerAngles;
+    Vector3 closedVector;
     Vector3 openVector;
     private bool open;
 
     private void Start()
     {
         open = false;
-        openVector = new Vector3(0.0f, openAngle);
+        currentEulerAngles = closedVector = parentTrans.eulerAngles;
+        openVector = new Vector3(0.0f, openAngle + closedVector.y);
     }
 
     private void Update()
     {
-        if (open && parentTrans.eulerAngles.y != openAngle)
+        if (open && currentEulerAngles != openVector)
         {
-            parentTrans.eulerAngles = Vector3.Lerp(parentTrans.eulerAngles, openVector, openingSpeed);
-            if (Mathf.Abs(parentTrans.eulerAngles.y - openAngle) < 1.0f)
-                parentTrans.eulerAngles = openVector;
+            currentEulerAngles = Vector3.Lerp(currentEulerAngles, openVector, openingSpeed);
+            if ((currentEulerAngles - openVector).sqrMagnitude < 1.0f)
+                currentEulerAngles = openVector;
+            parentTrans.eulerAngles = currentEulerAngles;
         }
-        if (!open && parentTrans.eulerAngles.y != 0.0f)
+        if (!open && currentEulerAngles != closedVector)
         {
-            parentTrans.eulerAngles = Vector3.Lerp(parentTrans.eulerAngles, Vector3.zero, openingSpeed);
-            if (Mathf.Abs(parentTrans.eulerAngles.y) < 1.0f)
-                parentTrans.eulerAngles = Vector3.zero;
+            currentEulerAngles = Vector3.Lerp(currentEulerAngles, closedVector, openingSpeed);
+            if ((currentEulerAngles - closedVector).sqrMagnitude < 1.0f)
+                currentEulerAngles = closedVector;
+            parentTrans.eulerAngles = currentEulerAngles;
         }
+
     }
 
     private void OnMouseOver()
