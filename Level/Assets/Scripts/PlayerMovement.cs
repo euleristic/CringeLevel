@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] Uncrouchable uncrouchable;
     [SerializeField] PlayerOptions options;
     [SerializeField] float moveSpeedAcc;
     [SerializeField] float moveSpeedMax;
@@ -39,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl)) crouching = !crouching;
+        if (Input.GetKeyDown(KeyCode.LeftControl) && CanUnCrouch()) crouching = !crouching;
     }
     void FixedUpdate()
     {
@@ -115,5 +116,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else return false;
         return true;
-    }    
+    }
+
+    private bool CanUnCrouch()
+    {
+        if (!crouching) return true;
+        return !Physics.Raycast(transform.position, Vector3.up, 1.5f);
+    }
 }

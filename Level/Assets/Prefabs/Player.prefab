@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6983035165324956418}
   - component: {fileID: 6983035165324956419}
   - component: {fileID: 6983035165324956412}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 6983035166208888161}
   - component: {fileID: 6983035166208888167}
   - component: {fileID: 1028567308}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -147,6 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8529cd411068a4b806c5ce2a0dcf5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uncrouchable: {fileID: 0}
+  options: {fileID: 0}
   moveSpeedAcc: 3
   moveSpeedMax: 5
   frictionDivisor: 2
