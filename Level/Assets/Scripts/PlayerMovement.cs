@@ -121,18 +121,4 @@ public class PlayerMovement : MonoBehaviour
         else return false;
         return true;
     }
-
-    private bool CanUnCrouch()
-    {
-        if (!crouching) return true;
-        
-        bool yo = !Physics.Raycast(transform.position + Vector3.up * 0.125f, Vector3.up, out RaycastHit hit, 0.5f);
-        print(hit.collider);
-        return yo;
-    }
-
-    private void OnDrawGizmos()
-    {
-        
-    }
 }

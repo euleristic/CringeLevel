@@ -9,6 +9,7 @@ public class Patrol : MonoBehaviour
     [SerializeField] float patrolSpeed;
     [SerializeField] float chaseSpeed;
     [SerializeField] float viewAngle;
+    [SerializeField] float killRange;
     CharacterController controller;
     Vector3 gravity;
     Vector3 velocity;
@@ -26,6 +27,8 @@ public class Patrol : MonoBehaviour
 
     void Update()
     {
+        if ((player.transform.position - transform.position).sqrMagnitude < killRange * killRange)
+            player.GetComponent<PlayerLives>().Kill();
         if (!chasing && checkPoints.Count != 0)
         {
             velocity = (checkPoints[currentCheckPointIndex] - transform.position).normalized * patrolSpeed;
@@ -52,12 +55,14 @@ public class Patrol : MonoBehaviour
             if (!Physics.Raycast(transform.position, playerRelative, playerRelative.magnitude) 
                 && angleToPlayer < viewAngle)
             {
-                player.GetComponent<PlayerLives>().Kill();
+                
                 chasing = true;
                 lastKnownLocation = player.transform.position;
             }
         }
     }
+
+    
 
     public void Alert(Vector3 position)
     {

@@ -10,31 +10,33 @@ public class SecurityCamera : MonoBehaviour
     [SerializeField] float viewAngle;
     [SerializeField] List<Patrol> AlertList;
     [SerializeField] PlayerMovement player;
-    [SerializeField] Transform cam;
+    [SerializeField] Renderer playerRenderer;
+    [SerializeField] Camera cam;
+    Camera playerCam;
     float currentAngle;
     void Start()
     {
         currentAngle = 0.0f;
+        playerCam = Camera.main;
     }
 
-    // Update is called once per frame
     void Update()
     {
         currentAngle = Mathf.Sin(turnSpeed * Time.time) * turnAngle;
         transform.rotation = Quaternion.Euler(0.0f, currentAngle, 0.0f);
         if (player != null)
         {
-            Vector3 playerRelative = player.transform.position - cam.transform.position;
-            float angleToPlayer = Mathf.Abs(Vector3.Angle(playerRelative, cam.transform.forward));
-            print(angleToPlayer);
-            if (!Physics.Raycast(cam.transform.position, playerRelative, playerRelative.magnitude)
-                && angleToPlayer < viewAngle)
+            Vector3 playerOnScreen = cam.WorldToViewportPoint(player.transform.position);
+            if (!(playerOnScreen.x > 0f && playerOnScreen.x < 1f
+                && playerOnScreen.y > 0f && playerOnScreen.y < 1f
+                && playerOnScreen.z > 0f)) return;
+            if (!Physics.Raycast(cam.transform.position + cam.transform.forward,
+                playerCam.transform.position - cam.transform.position, out RaycastHit hit,
+                (playerCam.transform.position - cam.transform.position).magnitude)) return;
+            if (!hit.collider.CompareTag("Player")) return;
+            foreach (Patrol guard in AlertList)
             {
-                player.GetComponent<PlayerLives>().Kill();
-                foreach (Patrol guard in AlertList)
-                {
-                    guard.Alert(player.transform.position);
-                }
+                guard.Alert(player.transform.position);
             }
         }
     }
