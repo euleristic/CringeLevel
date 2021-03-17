@@ -1366,6 +1366,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4ab4641a22e1d3409f308d72eb05fbb, type: 3}
+--- !u!4 &918945940 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9090544939494541205, guid: b0bd1f13453fa304d9266e8b090f8a06,
+    type: 3}
+  m_PrefabInstance: {fileID: 6983035166361476099}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &918945942 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 6616904708767228806, guid: b0bd1f13453fa304d9266e8b090f8a06,
@@ -4797,6 +4803,11 @@ PrefabInstance:
       propertyPath: mouseSpeed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6983035166208888167, guid: b0bd1f13453fa304d9266e8b090f8a06,
+        type: 3}
+      propertyPath: capsule
+      value: 
+      objectReference: {fileID: 918945940}
     - target: {fileID: 1585717421349151672, guid: b0bd1f13453fa304d9266e8b090f8a06,
         type: 3}
       propertyPath: canUnCrouch

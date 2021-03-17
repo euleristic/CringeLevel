@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] Uncrouchable uncrouchable;
     [SerializeField] PlayerOptions options;
+    [SerializeField] Transform capsule;
     [SerializeField] float moveSpeedAcc;
     [SerializeField] float moveSpeedMax;
     [SerializeField] float frictionDivisor;
@@ -88,6 +89,8 @@ public class PlayerMovement : MonoBehaviour
                 controller.center += new Vector3(0f, scaleLeft * crouchSpeed / 2.0f);
                 cam.transform.localPosition += new Vector3(0f, scaleLeft * crouchSpeed);
             }
+            capsule.localPosition = controller.center;
+            capsule.localScale = new Vector3(1f, controller.height / playerHeight, 1f);
         }
         if (!crouching && controller.height != playerHeight)
         {
@@ -105,6 +108,8 @@ public class PlayerMovement : MonoBehaviour
                 controller.center += new Vector3(0f, scaleLeft * crouchSpeed / 2.0f);
                 cam.transform.localPosition += new Vector3(0f, scaleLeft * crouchSpeed);
             }
+            capsule.localPosition = controller.center;
+            capsule.localScale = new Vector3(1f, controller.height / playerHeight, 1f);
         }
     }
     
