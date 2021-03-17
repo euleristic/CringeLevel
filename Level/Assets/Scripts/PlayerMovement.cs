@@ -19,8 +19,8 @@ public class PlayerMovement : MonoBehaviour
     CharacterController controller;
     Vector3 gravity;
     Vector3 velocity;
-    Vector3 crouchScale;
     Camera cam;
+    float playerHeight;
     float camVerticalRotation;
     bool crouching;
     void Start()
@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
         cam = Camera.main;
         camVerticalRotation = 0.0f;
         crouching = false;
-        crouchScale = new Vector3(1.0f, crouchFactor, 1.0f);
+        playerHeight = controller.height;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl) && CanUnCrouch()) crouching = !crouching;
+        if (Input.GetKeyDown(KeyCode.LeftControl) && uncrouchable.canUnCrouch) crouching = !crouching;
     }
     void FixedUpdate()
     {
@@ -71,34 +71,38 @@ public class PlayerMovement : MonoBehaviour
         transform.Rotate(transform.up, Input.GetAxis("Mouse X") * mouseSpeed);
         cam.transform.localRotation = Quaternion.Euler(camVerticalRotation, 0.0f, 0.0f);
 
-        if (crouching && transform.localScale != crouchScale)
+        if (crouching && controller.height != crouchFactor * playerHeight)
         {
             //Lerping manually to keep track
-            Vector3 scaleLeft = crouchScale - transform.localScale;
-            if (scaleLeft.sqrMagnitude < 0.001f)
+            float scaleLeft = crouchFactor * playerHeight - controller.height;
+            if (Mathf.Abs(scaleLeft) < 0.001f)
             {
-                transform.localScale = crouchScale;
-                transform.position += scaleLeft / 2.0f;
+                controller.height = crouchFactor * playerHeight;
+                controller.center += new Vector3(0f, scaleLeft / 2.0f);
+                cam.transform.localPosition += new Vector3(0f, scaleLeft);
             }
             else
             {
-                transform.localScale += scaleLeft * crouchSpeed;
-                transform.position += scaleLeft * crouchSpeed / 2.0f;
+                controller.height += scaleLeft * crouchSpeed;
+                controller.center += new Vector3(0f, scaleLeft * crouchSpeed / 2.0f);
+                cam.transform.localPosition += new Vector3(0f, scaleLeft * crouchSpeed);
             }
         }
-        if (!crouching && transform.localScale != Vector3.one)
+        if (!crouching && controller.height != playerHeight)
         {
             //Lerping manually to keep track
-            Vector3 scaleLeft = Vector3.one - transform.localScale;
-            if (scaleLeft.sqrMagnitude < 0.01f)
+            float scaleLeft = playerHeight - controller.height;
+            if (Mathf.Abs(scaleLeft) < 0.01f)
             {
-                transform.localScale = Vector3.one;
-                transform.position += scaleLeft / 2.0f;
+                controller.height = playerHeight;
+                controller.center += new Vector3(0f, scaleLeft / 2.0f);
+                cam.transform.localPosition += new Vector3(0f, scaleLeft);
             }
             else
             {
-                transform.localScale += scaleLeft * crouchSpeed;
-                transform.position += scaleLeft * crouchSpeed / 2.0f;
+                controller.height += scaleLeft * crouchSpeed;
+                controller.center += new Vector3(0f, scaleLeft * crouchSpeed / 2.0f);
+                cam.transform.localPosition += new Vector3(0f, scaleLeft * crouchSpeed);
             }
         }
     }
@@ -121,6 +125,14 @@ public class PlayerMovement : MonoBehaviour
     private bool CanUnCrouch()
     {
         if (!crouching) return true;
-        return !Physics.Raycast(transform.position, Vector3.up, 1.5f);
+        
+        bool yo = !Physics.Raycast(transform.position + Vector3.up * 0.125f, Vector3.up, out RaycastHit hit, 0.5f);
+        print(hit.collider);
+        return yo;
+    }
+
+    private void OnDrawGizmos()
+    {
+        
     }
 }
