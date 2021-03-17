@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Sandboxes/Ivan.unity
     guid: 10eb6bf0fe8a498478bbb467624e737d
   - enabled: 1
+    path: Assets/Scenes/Sandboxes/Daniel.unity
+    guid: 2abeb98e448ed79458957de428579677
+  - enabled: 1
     path: Assets/Scenes/Sandboxes/Valter.unity
     guid: 00b8c7f1b399c0e4d99def72e4bb31ac
   - enabled: 1

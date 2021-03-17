@@ -13,6 +13,10 @@ public class SceneTransitioner : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "Ivan")
         {
+            SceneManager.LoadScene("Daniel");
+        }
+        else if (SceneManager.GetActiveScene().name == "Daniel")
+        {
             SceneManager.LoadScene("Valter");
         }
         else if (SceneManager.GetActiveScene().name == "Valter")
