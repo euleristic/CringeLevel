@@ -30,6 +30,8 @@ public class LaserStatic : MonoBehaviour
     {
         RaycastHit hit;
         Physics.Raycast(_beamStartPoint, (_beamEndPoint - _beamStartPoint), out hit);
+        //Debug.DrawLine(_beamStartPoint, hit.point);
+        //Debug.Log(hit.transform.gameObject.name);
         if (hit.collider && hit.collider.gameObject.tag == "Player")
         {
             SceneReboot.RebootScene();
