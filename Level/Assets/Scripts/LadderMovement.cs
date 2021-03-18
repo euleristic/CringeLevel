@@ -27,7 +27,7 @@ public class LadderMovement : MonoBehaviour
         {
             Debug.Log("It works");
             isInside = true;
-            //playerMovementComponent.enabled = false;
+            playerMovementComponent.enabled = false;
         }
     }
 
@@ -36,7 +36,7 @@ public class LadderMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Ladder"))
         {
             isInside = false;
-            //playerMovementComponent.enabled = true;
+            playerMovementComponent.enabled = true;
         }
     }
 
