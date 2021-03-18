@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl) && uncrouchable.canUnCrouch) crouching = !crouching;
+        if (Input.GetKeyDown(KeyCode.C) && uncrouchable.canUnCrouch) crouching = !crouching;
     }
 
     void FixedUpdate()
