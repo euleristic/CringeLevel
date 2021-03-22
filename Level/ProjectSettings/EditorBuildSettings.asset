@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Entrypoint.unity
+    guid: abaaa1ffcd36d4f479f16fbdea8e4bb9
+  - enabled: 1
     path: Assets/Scenes/Sandboxes/Mattis.unity
     guid: 2db12e0f7742a674eb1adeda45773550
   - enabled: 1
