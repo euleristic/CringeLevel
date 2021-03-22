@@ -36,6 +36,8 @@ public class Laser : MonoBehaviour
     {
         //Debug.Log(_path.normalized);
         //Debug.Log(Vector3.SqrMagnitude(_laserStartPoint - _beamStartPoint));
+        DisableMeshes();
+
         _lr.SetPosition(0, _beamStartPoint);
         _lr.SetPosition(1, _beamEndPoint);
     }
@@ -61,5 +63,12 @@ public class Laser : MonoBehaviour
             SceneReboot.RebootScene();
         }
 
+    }
+
+    void DisableMeshes()
+    {
+        GetComponent<MeshRenderer>().enabled = false;
+        transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
+        transform.GetChild(1).gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 }
