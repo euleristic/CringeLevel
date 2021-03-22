@@ -7,6 +7,7 @@ public class LadderMovement : MonoBehaviour
     bool isInside = false;
     float climbingSpeed = 2.5f;
     PlayerMovement playerMovementComponent;
+    [SerializeField] AudioSource ladderAudio;
 
     private void Awake()
     {
@@ -28,6 +29,7 @@ public class LadderMovement : MonoBehaviour
             Debug.Log("It works");
             isInside = true;
             playerMovementComponent.enabled = false;
+            ladderAudio.Play();
         }
     }
 
@@ -37,6 +39,7 @@ public class LadderMovement : MonoBehaviour
         {
             isInside = false;
             playerMovementComponent.enabled = true;
+            ladderAudio.Stop();
         }
     }
 
@@ -45,13 +48,20 @@ public class LadderMovement : MonoBehaviour
     {
         if (isInside && Input.GetKey(KeyCode.W))
         {
-           //Debug.Log("It works");
-
+            //Debug.Log("It works");
+            if (!ladderAudio.isPlaying)
+                ladderAudio.Play();
             this.transform.position += Vector3.up * climbingSpeed * Time.deltaTime;
         }
         if (isInside && Input.GetKey(KeyCode.S))
         {
+            if (!ladderAudio.isPlaying)
+                ladderAudio.Play();
             this.transform.position -= Vector3.up * climbingSpeed * Time.deltaTime;
+        }
+        if(isInside && (Input.GetKeyUp(KeyCode.S) || (Input.GetKeyUp(KeyCode.W))) && ladderAudio.isPlaying)
+        {
+            ladderAudio.Stop();
         }
     }
 }

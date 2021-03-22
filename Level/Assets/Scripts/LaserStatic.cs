@@ -21,7 +21,9 @@ public class LaserStatic : MonoBehaviour
     }
 
     void Start()
-    { 
+    {
+        DisableMeshes();
+
         _lr.SetPosition(0, _beamStartPoint);
         _lr.SetPosition(1, _beamEndPoint);
     }
@@ -36,5 +38,11 @@ public class LaserStatic : MonoBehaviour
         {
             SceneReboot.RebootScene();
         }
+    }
+
+    void DisableMeshes()
+    {
+        GetComponent<MeshRenderer>().enabled = false;
+        transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 }
