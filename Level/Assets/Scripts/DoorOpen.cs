@@ -7,6 +7,7 @@ public class DoorOpen : MonoBehaviour
     [SerializeField] float openAngle;
     [SerializeField] float openingSpeed;
     [SerializeField] Transform parentTrans;
+    AudioSource source;
     Vector3 currentEulerAngles;
     Vector3 closedVector;
     Vector3 openVector;
@@ -17,6 +18,7 @@ public class DoorOpen : MonoBehaviour
         open = false;
         currentEulerAngles = closedVector = parentTrans.eulerAngles;
         openVector = new Vector3(0.0f, openAngle + closedVector.y);
+        source = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -40,6 +42,10 @@ public class DoorOpen : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (Input.GetKeyDown(KeyCode.E)) open = !open;
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            open = !open;
+            source.Play();
+        }
     }
 }
