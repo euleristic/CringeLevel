@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class getCaught : MonoBehaviour
 {
+    [SerializeField] buttonScript bs;
     public bool hasBeenCaught = false;
     void Update()
     {
@@ -12,6 +13,11 @@ public class getCaught : MonoBehaviour
         {
             Scene scene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(scene.name);
+        }
+
+        if (bs.pressedButton)
+        {
+            this.gameObject.SetActive(false);
         }
     }
 
