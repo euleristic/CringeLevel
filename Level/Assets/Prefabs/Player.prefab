@@ -419,7 +419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uncrouchable: {fileID: 7375381355792987559}
   options: {fileID: 0}
-  capsule: {fileID: 0}
+  capsule: {fileID: 9090544939494541205}
   moveSpeedAcc: 3
   moveSpeedMax: 5
   frictionDivisor: 2
