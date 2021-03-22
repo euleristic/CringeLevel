@@ -287,13 +287,14 @@ GameObject:
   m_Component:
   - component: {fileID: 8219361637364147263}
   - component: {fileID: 8920010775328764979}
+  - component: {fileID: 219447241643934690}
   m_Layer: 0
   m_Name: FloppyDisc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8219361637364147263
 Transform:
   m_ObjectHideFlags: 0
@@ -303,7 +304,7 @@ Transform:
   m_GameObject: {fileID: 7160992370395728698}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.774, y: 1.3882847, z: 8.153}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3.56303, y: 1.5237399, z: 1.4849794}
   m_Children:
   - {fileID: 9205270061013025605}
   - {fileID: 3674511362430460067}
@@ -325,6 +326,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.16802585, y: 0.0894593, z: 0.1785326}
   m_Center: {x: 0.0009836555, y: -0.013062298, z: 0.009681225}
+--- !u!114 &219447241643934690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7160992370395728698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e00b43dd8e07c0048a8185003dbe5634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goalVector: {x: -0.01068916, y: 0.3774538, z: -0.562}
+  collected: 0
 --- !u!1 &8359066584804412659
 GameObject:
   m_ObjectHideFlags: 0

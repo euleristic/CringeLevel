@@ -5,6 +5,7 @@ using UnityEngine;
 public class FloppyDisc : MonoBehaviour
 {
     [SerializeField] Vector3 goalVector;
+    [SerializeField] AudioSource source;
     public bool collected = false;
 
     // Update is called once per frame
@@ -17,6 +18,7 @@ public class FloppyDisc : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
+            if (source != null) source.Play();
             collected = true;
             gameObject.SetActive(false);
         }
