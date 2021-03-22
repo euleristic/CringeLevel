@@ -7,11 +7,11 @@ public class DoorOpen : MonoBehaviour
     [SerializeField] float openAngle;
     [SerializeField] float openingSpeed;
     [SerializeField] Transform parentTrans;
-    AudioSource source;
+    public AudioSource source;
     Vector3 currentEulerAngles;
     Vector3 closedVector;
     Vector3 openVector;
-    private bool open;
+    public bool open;
 
     private void Start()
     {

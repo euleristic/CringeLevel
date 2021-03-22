@@ -43,6 +43,7 @@ public class Patrol : MonoBehaviour
             velocity = (lastKnownLocation - transform.position).normalized * chaseSpeed;
             if ((lastKnownLocation - transform.position).sqrMagnitude < 0.1f)
                 chasing = false;
+
         }
         transform.forward = velocity.normalized;
         controller.Move(velocity * Time.deltaTime);

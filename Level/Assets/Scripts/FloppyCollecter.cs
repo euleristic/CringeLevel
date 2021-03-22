@@ -8,7 +8,6 @@ public class FloppyCollecter : MonoBehaviour
     [SerializeField] List<FloppyDisc> floppyDiscs;
 
 
-    // Update is called once per frame
     void Update()
     {
         foreach (FloppyDisc disc in floppyDiscs)
